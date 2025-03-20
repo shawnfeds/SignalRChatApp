@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<script>
+    // Apply the saved theme when the page loads
+    window.onload = function() {
+        var savedTheme = localStorage.getItem('selectedTheme');
+
+        if (savedTheme) {
+            document.getElementById("mainCSS").setAttribute("href", savedTheme);
+        }
+    };
+</script>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h2 class="text-center">Login</h2>
+            <div class="row p-1">
+                <div class="col-2"></div>
+                <div class="col-10">
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username" />
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-2"></div>
+                <div class="col-10 d-grid gap-2">
+                    <input type="button" id="loginButton" class="btn btn-success" value="Chat" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script>
+    document.getElementById("loginButton").addEventListener("click", function() {
+        var username = document.getElementById("username").value;
+        if (username) {
+            window.location.href = "/Home/Index?username=" + encodeURIComponent(username);
+        } else {
+            Swal.fire('Validation', 'Please enter username to proceed further', 'error');
+        }
+    });
+</script>

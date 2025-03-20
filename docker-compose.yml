@@ -1,0 +1,19 @@
+﻿version: '3.8'
+
+services:
+  signalrchatapp:
+    image: signalrchatapp:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - signalrchatapp-network
+
+networks:
+  signalrchatapp-network:
+    driver: bridge

@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "SignalR Chat";
+    var username = ViewBag.Username;
+}
+
+<script>
+    // Apply the saved theme when the page loads
+    window.onload = function() {
+        var savedTheme = localStorage.getItem('selectedTheme');
+
+        if (savedTheme) {
+            document.getElementById("mainCSS").setAttribute("href", savedTheme);
+        }
+    };
+</script>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="row p-1">
+                <div class="col-2">Me</div>
+                <div class="col-10">
+                    <input type="text" id="userInput" class="form-control" value="@username" readonly/>
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-2">To</div>
+                <div class="col-10">
+                    <select id="ToUser" class="form-control"> 
+                        <option value="">Select a user</option> 
+                    </select>
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="input-group">
+                    <div class="col-2">Message</div>
+                    <div class="col-10">
+                        <textarea id="messageInput" class="form-control w-100" placeholder="Enter your message"></textarea>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa-solid fa-info-circle" id="ToggleCode" style="cursor: pointer;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-2"></div>
+                <div class="col-10 d-grid gap-2">
+                    <input type="button" id="sendButton" class="btn btn-success " value="Send Message" />
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-12">
+                    <hr />
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-12">
+                    <ul id="messagesList" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+<script src="~/js/morseCode.js"></script>
